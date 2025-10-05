@@ -1,13 +1,12 @@
 
-from typing import TYPE_CHECKING
 
 from pydantic import BaseModel, Field
 
+from app.config.configuration_service import ConfigurationService
+from app.services.graph_db.interface.graph_db import IGraphService
 from app.sources.client.http.http_client import HTTPClient
 from app.sources.client.iclient import IClient
 
-from app.config.configuration_service import ConfigurationService
-from app.services.graph_db.interface.graph_db import IGraphService
 
 class DiscordResponse(BaseModel):
     """Standardized Discord API response wrapper using Pydantic"""
@@ -122,7 +121,7 @@ class DiscordClient(IClient):
 
         """
         return cls(config.create_client())
-    
+
     @classmethod
     async def build_from_services(
         cls,
